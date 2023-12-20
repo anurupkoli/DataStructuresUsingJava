@@ -22,7 +22,7 @@ public class OrderAgnosticBinSearch {
         return -1;
     }
     public static void main(String[] args) {
-        int[] arr = {100,40,32,30,20,10,1,0,-1,-10,-12};
-        System.out.println(orderAgnosticBinSearch(arr, 40));
+        int[] arr = {1,2,3,4,45,66,77,88};
+        System.out.println(orderAgnosticBinSearch(arr, 45));
     }
 }
