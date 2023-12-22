@@ -1,12 +1,12 @@
 package BinarySearch;
 
-public class CeilingNo {
-    static int ceilingNo(int[] arr, int no) {
+public class FloorNo {
+    static int floorNo(int[] arr, int no) {
         int start = 0;
         int end = arr.length - 1;
         while (start <= end) {
             int mid = start + (end - start) / 2;
-            if(no>arr[arr.length-1]){
+            if(arr[0]>no){
                 return -1;
             }
             if (no > arr[mid]) {
@@ -22,15 +22,15 @@ public class CeilingNo {
             //     mid=mid+1;
             // }
             // if (arr[mid-1] < no && arr[mid] > no) {
-            //     return arr[mid];
+            //     return arr[mid-1];
             // }
 
         }
-        return arr[start];
+        return arr[end];
     }
 
     public static void main(String[] args) {
         int[] arr = { -10, -5, -1, 0, 20, 34, 45, 66, 77, 88 };
-        System.out.println(ceilingNo(arr, 87));
+        System.out.println(floorNo(arr, -11));
     }
 }
