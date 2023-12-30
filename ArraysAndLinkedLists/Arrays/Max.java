@@ -1,4 +1,4 @@
-package ArraysAndLinkedLists;
+package ArraysAndLinkedLists.Arrays;
 
 public class Max {
     static int max(int[] arr){

@@ -1,4 +1,4 @@
-package ArraysAndLinkedLists;
+package ArraysAndLinkedLists.Arrays;
 import java.util.Scanner;
 
 public class MultiDimeArrays {
