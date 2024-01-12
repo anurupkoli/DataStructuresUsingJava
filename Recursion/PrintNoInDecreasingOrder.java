@@ -1,15 +1,14 @@
 package Recursion;
 
 public class PrintNoInDecreasingOrder {
-    static int prevNo = 1;
-    static void printNoIncresingOrder(int n, int prevNo){
-        if(prevNo > n){
+    static void printNoIncresingOrder(int n){
+        if(n == 0){
             return;
         }
-        System.out.print(prevNo + " ");
-        printNoIncresingOrder(n, prevNo+1);
+        printNoIncresingOrder(n-1);
+        System.out.print(n + " ");
     }
     public static void main(String[] args) {
-        printNoIncresingOrder(10, prevNo);
+        printNoIncresingOrder(10);
     }
 }
