@@ -16,7 +16,7 @@ public class QuickSort {
     public static int patrtition(int[] arr, int start, int end){
         int piv = arr[end];
         int i = start - 1;
-        for (int j = 0; j < end; j++) {
+        for (int j = start; j < end; j++) {
             if(arr[j] < piv){
                 i++;
                 int temp = arr[j];
