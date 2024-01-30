@@ -20,7 +20,7 @@ public class ContainerWithMostWater {
             int height = Math.min(arr.get(leftP), arr.get(rightP));
             int width = rightP - leftP;
             waterVolume = Math.max(waterVolume, height * width);
-            if(leftP <= rightP){
+            if(arr.get(leftP) <= arr.get(rightP)){
                 leftP++;
             }
             else{
