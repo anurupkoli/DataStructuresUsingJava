@@ -113,6 +113,22 @@ class LinkedListL{
         return -1;
     }
 
+    public void reverseList(){
+        if(length == 0){
+            System.out.println("Empty!");
+            return;
+        }
+        Node prevNode = null;
+        Node currNode = tail = head;
+        while(currNode != null){
+            Node nextNode = currNode.next;
+            currNode.next = prevNode;
+            prevNode = currNode;
+            currNode = nextNode;
+        }
+        head = prevNode;
+    }
+
     public void print(){
         if(head == null){
             System.out.println("Empty!");
@@ -133,7 +149,7 @@ public class LinkedList {
         ll.add(2);
         ll.add(3);
         ll.add(4);
-        System.out.println(ll.search(5));;
+        ll.reverseList();
         ll.print();
     }
 }
