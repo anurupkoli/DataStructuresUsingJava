@@ -11,52 +11,90 @@ class LinkedListL{
     }
 
     Node head, tail;
-    public int length = 0;
+    public int length;
     LinkedListL(){
         this.head = null;
         this.tail = null;
+        this.length = 0;
     }
 
     public void addFirst(int data){
-        length++;
         Node newNode = new Node(data);
-        if(head == null){
+        if(length == 0){
             head = tail = newNode;
+            length++;
             return;
         }
+        length++;
         newNode.next = head;
         head = newNode;
     }
    
     public void add(int data){
-        length++;
         Node newNode = new Node(data);
-        if(head == null){
+        if(length == 0){
             head = tail = newNode;
+            length++;
             return;
         }
+        length++;
         tail.next = newNode;
         tail = newNode;
     }
 
     public void add(int index, int data){
-        length++;
-        Node newNode = new Node(data);
-        Node temp = head;
-        if(index >= this.length || index < 0){
+        if(index > this.length || index < 0){
             System.out.println("Index out of bound");
             return;
         }
         if(index == 0){
-            newNode.next = head;
-            head = newNode;
+            addFirst(data);
             return;
         }
+
+        Node newNode = new Node(data);
+        Node temp = head;
+        length++;
         for (int i = 0; i < index-1; i++) {
             temp = temp.next;
         }
         newNode.next = temp.next;
         temp.next = newNode;
+    }
+
+    public void removeFirst(){
+        if(length == 0){
+            System.out.println("Empty!");
+            return;
+        }
+        else if(length == 1){
+            head = tail = null;
+            length = 0;
+            return;
+        }
+        length--;
+        head = head.next;
+    }
+
+    public void removeLast(){
+        if(length == 0){
+            System.out.println("Empty!");
+            return;
+        }
+        else if(length == 1){
+            head = tail = null;
+            length = 0;
+            return;
+        }
+        length--;
+        Node prevNode = head;
+        int i = 0;
+        while (i < length-1) {
+            prevNode = prevNode.next;
+            i++;
+        };
+        prevNode.next = null;
+        tail = prevNode;
     }
 
     public void print(){
@@ -78,7 +116,8 @@ public class LinkedList {
         ll.add(1);
         ll.add(2);
         ll.add(3);
-        ll.add(0, 5);
+        ll.add(4);
+        ll.removeLast();
         ll.print();
     }
 }
