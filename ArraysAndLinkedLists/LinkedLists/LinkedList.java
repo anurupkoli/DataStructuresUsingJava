@@ -97,6 +97,22 @@ class LinkedListL{
         tail = prevNode;
     }
 
+    public int search(int key){
+        if(length == 0){
+            return -1;
+        }
+
+        Node temp = head;
+        for (int i = 0; i < length; i++) {
+            if(temp.data == key){
+                return i;
+            }
+            temp = temp.next;
+        }
+
+        return -1;
+    }
+
     public void print(){
         if(head == null){
             System.out.println("Empty!");
@@ -117,7 +133,7 @@ public class LinkedList {
         ll.add(2);
         ll.add(3);
         ll.add(4);
-        ll.removeLast();
+        System.out.println(ll.search(5));;
         ll.print();
     }
 }
