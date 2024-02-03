@@ -129,6 +129,26 @@ class LinkedListL{
         head = prevNode;
     }
 
+    public void removeNthNodeFromLast(int index){
+        if(index == length){
+            head = head.next;
+            length--;
+            return;
+        }
+        else if(index > length){
+            System.out.println("Index out of bound");
+            return;
+        }
+        int oriIndex = length - index;
+        Node currNode = head;
+        for (int i = 0; i < oriIndex-1; i++) {
+            currNode = currNode.next;
+        }
+        Node nextNode = currNode.next;
+        currNode.next = nextNode.next;
+        length--;
+    }
+
     public void print(){
         if(head == null){
             System.out.println("Empty!");
@@ -149,7 +169,7 @@ public class LinkedList {
         ll.add(2);
         ll.add(3);
         ll.add(4);
-        ll.reverseList();
+        ll.removeNthNodeFromLast(5);
         ll.print();
     }
 }
