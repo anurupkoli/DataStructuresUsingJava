@@ -36,6 +36,7 @@ class NewLinkedList extends LinkedListL{
             return;
         }
 
+        slowNode = head;
         Node prevNode = null;
         while (fastNode != slowNode) {
             prevNode = fastNode;

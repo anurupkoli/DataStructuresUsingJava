@@ -159,6 +159,66 @@ class LinkedListL{
             System.out.print(travNode.data + " ");
             travNode = travNode.next;
         }
+        System.out.println();
+    }
+
+    public Node mergeSort(Node head){
+        if(head == null || head.next == null){
+            return head;
+        }
+
+        Node midNode = getMid(head);
+        Node rightHead = midNode.next;
+        midNode.next = null;
+
+        Node newLeft = mergeSort(head);
+        Node newRight = mergeSort(rightHead);
+
+        return merge(newLeft, newRight);
+    }
+
+    private Node getMid(Node head){
+        Node slow = head;
+        Node fast = head.next;
+
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+    }
+
+    private Node merge(Node left, Node right){
+        Node mergeLL = new Node(-1);
+        Node temp = mergeLL;
+
+        while (left != null && right != null) {
+            if(left.data <= right.data){
+                temp.next = left;
+                left = left.next;
+                temp = temp.next;
+            }
+            else{
+                temp.next = right;
+                right = right.next;
+                temp = temp.next;
+            }
+        }
+
+        while (left != null) {
+            temp.next = left;
+            left =  left.next;
+            temp = temp.next;
+        }
+
+        while (right != null) {
+            temp.next = right;
+            right = right.next;
+            temp = temp.next;
+        }
+
+        return mergeLL.next;
     }
 }
 
@@ -166,10 +226,11 @@ public class LinkedList {
     public static void main(String[] args) {
         LinkedListL ll = new LinkedListL();
         ll.add(1);
-        ll.add(2);
-        ll.add(3);
+        ll.add(5);
+        ll.add(7);
         ll.add(4);
-        ll.removeNthNodeFromLast(5);
+        ll.print();
+        ll.mergeSort(ll.head);
         ll.print();
     }
 }
