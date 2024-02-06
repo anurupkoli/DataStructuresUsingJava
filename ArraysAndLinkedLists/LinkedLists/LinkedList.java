@@ -220,17 +220,48 @@ class LinkedListL{
 
         return mergeLL.next;
     }
+
+    public void zigZag(){
+        Node mid = getMid(head);
+
+        Node currNode = mid.next;
+        mid.next = null;
+        Node prev = null;
+        Node next;
+        while (currNode != null) {
+            next = currNode.next;
+            currNode.next = prev;
+            prev = currNode;
+            currNode = next;
+        }
+
+        Node leftHead = head;
+        Node rightHead = prev;
+        Node leftNext;
+        Node rightNext;
+
+        while(leftHead != null && rightHead != null){
+            leftNext = leftHead.next;
+            rightNext = rightHead.next;
+            leftHead.next = rightHead;
+            rightHead.next = leftNext;
+
+            leftHead = leftNext;
+            rightHead = rightNext;
+        }
+    }
 }
 
 public class LinkedList {
     public static void main(String[] args) {
         LinkedListL ll = new LinkedListL();
         ll.add(1);
-        ll.add(5);
-        ll.add(7);
+        ll.add(2);
+        ll.add(3);
         ll.add(4);
+        ll.add(5);
         ll.print();
-        ll.mergeSort(ll.head);
+        ll.zigZag();
         ll.print();
     }
 }
