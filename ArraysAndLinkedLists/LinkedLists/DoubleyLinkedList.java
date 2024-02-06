@@ -60,6 +60,26 @@ class DoublyLL{
         }
         System.out.println();
     }
+
+    public void reverseList(){
+        if(head == null){
+            return;
+        }
+
+        Node currNode = head;
+        Node prev = null;
+        Node next;
+
+        while(currNode != null){
+            next = currNode.next;
+            currNode.next = prev;
+            currNode.prev = next;
+            prev = currNode;
+            currNode = next;
+        }
+        
+        head = prev;
+    }
 }
 
 public class DoubleyLinkedList {
@@ -69,8 +89,8 @@ public class DoubleyLinkedList {
         ll.addFirst(2);
         ll.addFirst(3);
         ll.addFirst(4);
-        ll.removeFirst();
-        System.out.println(ll.length);
+        ll.print();
+        ll.reverseList();
         ll.print();
     }
 }
