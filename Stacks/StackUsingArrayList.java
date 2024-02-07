@@ -2,7 +2,7 @@ package Stacks;
 
 import java.util.ArrayList;
 
-class Stack{
+class StackArrL{
     ArrayList<Integer> list = new ArrayList<>();
 
     public boolean isEmpty(){
