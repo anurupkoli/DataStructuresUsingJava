@@ -15,7 +15,7 @@ public class ActivityProblem {
             activities[i][2] = end[i];
         }
 
-        Arrays.sort(activities, Comparator.comparing(o -> o[2]));
+        Arrays.sort(activities, Comparator.comparingDouble(o -> o[2]));
 
         ArrayList<Integer> ans = new ArrayList<>();
         int maxActivities = 1;
