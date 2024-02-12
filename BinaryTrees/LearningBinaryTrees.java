@@ -171,6 +171,23 @@ class BinaryTreesB {
     public int sum(){
         return sumRec(root);
     }
+
+    private int diamtereRec(Node root){
+        if(root == null){
+            return 0;
+        }
+
+        int leftDiam = diamtereRec(root.left);
+        int leftHeight = heightRec(root.left);
+        int rightDiam = diamtereRec(root.right);
+        int rightHeight = heightRec(root.right);
+        int incRootDiam = leftHeight + rightHeight + 1;
+        int compared = Math.max(leftDiam, rightDiam);
+        return Math.max(incRootDiam, compared);
+    }
+    public int diameter(){
+        return diamtereRec(root);
+    }
 }
 
 public class LearningBinaryTrees {
@@ -186,6 +203,7 @@ public class LearningBinaryTrees {
         System.out.println(binaryTree.findLeaves());
         System.out.println(binaryTree.countNodes());
         System.out.println(binaryTree.sum());
+        System.out.println(binaryTree.diameter());
         // binaryTree.printTree();
     }
 }
