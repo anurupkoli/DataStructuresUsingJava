@@ -110,6 +110,37 @@ class BinaryTreesB {
         }
         System.out.println();
     }
+
+    private int heightRec(Node root){
+        if(root == null){
+            return 0;
+        }
+
+        int leftHeight = heightRec(root.left);
+        int rightHeight = heightRec(root.right);
+
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    public int height(){
+        return heightRec(root);
+    }
+
+    private int findLeafRec(Node root){
+        if(root == null){
+            return 0;
+        }
+
+        if(root.left == null && root.right == null){
+            return 1;
+        }
+
+        return findLeafRec(root.left) + findLeafRec(root.right);
+    }
+
+    public int findLeaves(){
+        return findLeafRec(root);
+    }
 }
 
 public class LearningBinaryTrees {
@@ -121,6 +152,8 @@ public class LearningBinaryTrees {
         binaryTree.inOrder();
         binaryTree.postOrder();
         binaryTree.levelOrderRec();
+        System.out.println(binaryTree.height());
+        System.out.println(binaryTree.findLeaves());
         // binaryTree.printTree();
     }
 }
