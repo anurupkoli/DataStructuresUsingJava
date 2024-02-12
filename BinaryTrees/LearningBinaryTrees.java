@@ -172,21 +172,46 @@ class BinaryTreesB {
         return sumRec(root);
     }
 
-    private int diamtereRec(Node root){
+    // private int diamtereRec(Node root){
+    //     if(root == null){
+    //         return 0;
+    //     }
+
+    //     int leftDiam = diamtereRec(root.left);
+    //     int leftHeight = heightRec(root.left);
+    //     int rightDiam = diamtereRec(root.right);
+    //     int rightHeight = heightRec(root.right);
+    //     int incRootDiam = leftHeight + rightHeight + 1;
+    //     return Math.max(incRootDiam, Math.max(leftDiam, rightDiam));
+    // }
+    // public int diameter(){
+    //     return diamtereRec(root);
+    // }
+
+    class Info{
+        int diam;
+        int ht;
+        Info(int diam, int ht){
+            this.diam = diam;
+            this.ht = ht;
+        }
+    }
+    private Info diameterRec(Node root){
         if(root == null){
-            return 0;
+            return new Info(0, 0);
         }
 
-        int leftDiam = diamtereRec(root.left);
-        int leftHeight = heightRec(root.left);
-        int rightDiam = diamtereRec(root.right);
-        int rightHeight = heightRec(root.right);
-        int incRootDiam = leftHeight + rightHeight + 1;
-        int compared = Math.max(leftDiam, rightDiam);
-        return Math.max(incRootDiam, compared);
+        Info leftInfo = diameterRec(root.left);
+        Info righInfo = diameterRec(root.right);
+
+        int diam = Math.max(Math.max(leftInfo.diam, righInfo.diam),leftInfo.ht + righInfo.ht + 1);
+        int ht = Math.max(leftInfo.ht, righInfo.ht) + 1;
+        return new Info(diam, ht);
     }
+
     public int diameter(){
-        return diamtereRec(root);
+        Info info = diameterRec(root);
+        return info.diam;
     }
 }
 
