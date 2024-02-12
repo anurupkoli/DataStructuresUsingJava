@@ -35,20 +35,52 @@ class BinaryTreesB {
         this.root = buildTreeRec(arr);
     }
 
-    private void printTreeRec(Node root){
+    private void preOrderRec(Node root){
         if(root == null) {
             System.out.print(-1 + " ");
             return;
         }
         System.out.print(root.data + " ");
-        printTreeRec(root.left);
-        printTreeRec(root.right);
+        preOrderRec(root.left);
+        preOrderRec(root.right);
     }
 
-    public void printTree(){
-        printTreeRec(this.root);
+    public void preOrder(){
+        preOrderRec(this.root);
         System.out.println();
     }
+
+    private void inOrderRec(Node root){
+        if(root == null){
+            System.out.print(-1 + " ");
+            return;
+        }
+        inOrderRec(root.left);
+        System.out.print(root.data + " ");
+        inOrderRec(root.right);
+    }
+
+    public void inOrder(){
+        inOrderRec(this.root);
+        System.out.println();
+    }
+
+    private void postOrderRec(Node root){
+        if(root == null){
+            System.out.print(-1 + " ");
+            return;
+        }
+        postOrderRec(root.left);
+        postOrderRec(root.right);
+        System.out.print(root.data + " ");
+    }
+
+    public void postOrder(){
+        postOrderRec(this.root);
+        System.out.println();
+    }
+
+    
 }
 
 public class LearningBinaryTrees {
@@ -56,7 +88,9 @@ public class LearningBinaryTrees {
         int[] data = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1, -1};
         BinaryTreesB binaryTree = new BinaryTreesB();
         binaryTree.buildTree(data);
-        binaryTree.printTree();
+        binaryTree.preOrder();
+        binaryTree.inOrder();
+        binaryTree.postOrder();
         // binaryTree.printTree();
     }
 }
