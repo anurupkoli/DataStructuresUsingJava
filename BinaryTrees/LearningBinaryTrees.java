@@ -1,5 +1,8 @@
 package BinaryTrees;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 class BinaryTreesB {
     class Node{
         int data;
@@ -37,7 +40,7 @@ class BinaryTreesB {
 
     private void preOrderRec(Node root){
         if(root == null) {
-            System.out.print(-1 + " ");
+            // System.out.print(-1 + " ");
             return;
         }
         System.out.print(root.data + " ");
@@ -52,7 +55,7 @@ class BinaryTreesB {
 
     private void inOrderRec(Node root){
         if(root == null){
-            System.out.print(-1 + " ");
+            // System.out.print(-1 + " ");
             return;
         }
         inOrderRec(root.left);
@@ -67,7 +70,7 @@ class BinaryTreesB {
 
     private void postOrderRec(Node root){
         if(root == null){
-            System.out.print(-1 + " ");
+            // System.out.print(-1 + " ");
             return;
         }
         postOrderRec(root.left);
@@ -80,7 +83,33 @@ class BinaryTreesB {
         System.out.println();
     }
 
-    
+    public void levelOrderRec(){
+        if(root == null) return;
+        Queue<Node> node = new LinkedList<>();
+        node.add(root);
+        node.add(null);
+        while (!node.isEmpty()) {
+            Node currNode = node.remove();
+            if(currNode == null){
+                if(node.isEmpty()){
+                    break;
+                }
+                else{
+                    node.add(null);
+                }
+            }
+            else{
+                System.out.print(currNode.data + " ");
+                if(currNode.left != null){
+                    node.add(currNode.left);
+                }
+                if(currNode.right != null){
+                    node.add(currNode.right);
+                }
+            }
+        }
+        System.out.println();
+    }
 }
 
 public class LearningBinaryTrees {
@@ -91,6 +120,7 @@ public class LearningBinaryTrees {
         binaryTree.preOrder();
         binaryTree.inOrder();
         binaryTree.postOrder();
+        binaryTree.levelOrderRec();
         // binaryTree.printTree();
     }
 }
