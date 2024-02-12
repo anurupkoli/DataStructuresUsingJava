@@ -141,6 +141,36 @@ class BinaryTreesB {
     public int findLeaves(){
         return findLeafRec(root);
     }
+
+    private int countNodesRec(Node root){
+        if(root == null){
+            return 0;
+        }
+
+        int leftNodes = countNodesRec(root.left);
+        int rightNodes = countNodesRec(root.right);
+
+        return leftNodes + rightNodes + 1;
+    }
+
+    public int countNodes(){
+        return countNodesRec(root);
+    }
+
+    private int sumRec(Node root){
+        if(root == null){
+            return 0;
+        }
+
+        int leftSum = sumRec(root.left);
+        int rightSum = sumRec(root.right);
+
+        return leftSum + rightSum + root.data;
+    }
+
+    public int sum(){
+        return sumRec(root);
+    }
 }
 
 public class LearningBinaryTrees {
@@ -154,6 +184,8 @@ public class LearningBinaryTrees {
         binaryTree.levelOrderRec();
         System.out.println(binaryTree.height());
         System.out.println(binaryTree.findLeaves());
+        System.out.println(binaryTree.countNodes());
+        System.out.println(binaryTree.sum());
         // binaryTree.printTree();
     }
 }
