@@ -213,22 +213,55 @@ class BinaryTreesB {
         Info info = diameterRec(root);
         return info.diam;
     }
+
+    public boolean isSubTree(Node subTree){
+        return isSubTree(this.root, subTree);
+    }
+
+    private boolean isSubTree(Node root, Node subTree){
+        if(root == null){
+            return false;
+        }
+
+        if(root.data == subTree.data){
+            if(isIdentical(root, subTree)){
+                return true;
+            }
+        }
+
+        return isSubTree(root.left, subTree) || isSubTree(root.right, subTree);
+    }
+
+    private boolean isIdentical(Node root, Node subTree){
+        if(root == null && subTree == null ){
+            return true;
+        }
+        else if(root == null || subTree == null || root.data != subTree.data){
+            return false;
+        }
+
+        if(!isIdentical(root.left, subTree.left)){
+            return false;
+        }
+        if(!isIdentical(root.right, subTree.right)){
+            return false;
+        }
+
+        return true;
+    }
 }
 
 public class LearningBinaryTrees {
     public static void main(String[] args) {
-        int[] data = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1, -1};
+        int[] data = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1, 7, -1, -1};
+        int[] data2 = {2, 4, -1, -1, 5, -1, -1};
         BinaryTreesB binaryTree = new BinaryTreesB();
         binaryTree.buildTree(data);
-        binaryTree.preOrder();
-        binaryTree.inOrder();
-        binaryTree.postOrder();
-        binaryTree.levelOrderRec();
-        System.out.println(binaryTree.height());
-        System.out.println(binaryTree.findLeaves());
-        System.out.println(binaryTree.countNodes());
-        System.out.println(binaryTree.sum());
-        System.out.println(binaryTree.diameter());
-        // binaryTree.printTree();
+
+        BinaryTreesB subTree = new BinaryTreesB();
+        subTree.buildTree(data2);
+        subTree.preOrder();
+
+        System.out.println(binaryTree.isSubTree(subTree.root));
     }
 }
