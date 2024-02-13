@@ -1,14 +1,16 @@
 package BinaryTrees;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
 class BinaryTreesB {
-    class Node{
+    class Node {
         int data;
         Node left;
         Node right;
-        Node(int data){
+
+        Node(int data) {
             this.data = data;
             this.left = null;
             this.right = null;
@@ -17,14 +19,15 @@ class BinaryTreesB {
 
     public Node root;
     private int indx;
-    BinaryTreesB(){
+
+    BinaryTreesB() {
         this.root = null;
         this.indx = -1;
     }
 
-    private Node buildTreeRec(int[] arr){
+    private Node buildTreeRec(int[] arr) {
         indx++;
-        if(arr[indx] == -1){
+        if (arr[indx] == -1) {
             return null;
         }
 
@@ -34,12 +37,12 @@ class BinaryTreesB {
         return newNode;
     }
 
-    public void buildTree(int[] arr){
+    public void buildTree(int[] arr) {
         this.root = buildTreeRec(arr);
     }
 
-    private void preOrderRec(Node root){
-        if(root == null) {
+    private void preOrderRec(Node root) {
+        if (root == null) {
             // System.out.print(-1 + " ");
             return;
         }
@@ -48,13 +51,13 @@ class BinaryTreesB {
         preOrderRec(root.right);
     }
 
-    public void preOrder(){
+    public void preOrder() {
         preOrderRec(this.root);
         System.out.println();
     }
 
-    private void inOrderRec(Node root){
-        if(root == null){
+    private void inOrderRec(Node root) {
+        if (root == null) {
             // System.out.print(-1 + " ");
             return;
         }
@@ -63,13 +66,13 @@ class BinaryTreesB {
         inOrderRec(root.right);
     }
 
-    public void inOrder(){
+    public void inOrder() {
         inOrderRec(this.root);
         System.out.println();
     }
 
-    private void postOrderRec(Node root){
-        if(root == null){
+    private void postOrderRec(Node root) {
+        if (root == null) {
             // System.out.print(-1 + " ");
             return;
         }
@@ -78,32 +81,31 @@ class BinaryTreesB {
         System.out.print(root.data + " ");
     }
 
-    public void postOrder(){
+    public void postOrder() {
         postOrderRec(this.root);
         System.out.println();
     }
 
-    public void levelOrderRec(){
-        if(root == null) return;
+    public void levelOrderRec() {
+        if (root == null)
+            return;
         Queue<Node> node = new LinkedList<>();
         node.add(root);
         node.add(null);
         while (!node.isEmpty()) {
             Node currNode = node.remove();
-            if(currNode == null){
-                if(node.isEmpty()){
+            if (currNode == null) {
+                if (node.isEmpty()) {
                     break;
-                }
-                else{
+                } else {
                     node.add(null);
                 }
-            }
-            else{
+            } else {
                 System.out.print(currNode.data + " ");
-                if(currNode.left != null){
+                if (currNode.left != null) {
                     node.add(currNode.left);
                 }
-                if(currNode.right != null){
+                if (currNode.right != null) {
                     node.add(currNode.right);
                 }
             }
@@ -111,8 +113,8 @@ class BinaryTreesB {
         System.out.println();
     }
 
-    private int heightRec(Node root){
-        if(root == null){
+    private int heightRec(Node root) {
+        if (root == null) {
             return 0;
         }
 
@@ -122,28 +124,28 @@ class BinaryTreesB {
         return Math.max(leftHeight, rightHeight) + 1;
     }
 
-    public int height(){
+    public int height() {
         return heightRec(root);
     }
 
-    private int findLeafRec(Node root){
-        if(root == null){
+    private int findLeafRec(Node root) {
+        if (root == null) {
             return 0;
         }
 
-        if(root.left == null && root.right == null){
+        if (root.left == null && root.right == null) {
             return 1;
         }
 
         return findLeafRec(root.left) + findLeafRec(root.right);
     }
 
-    public int findLeaves(){
+    public int findLeaves() {
         return findLeafRec(root);
     }
 
-    private int countNodesRec(Node root){
-        if(root == null){
+    private int countNodesRec(Node root) {
+        if (root == null) {
             return 0;
         }
 
@@ -153,12 +155,12 @@ class BinaryTreesB {
         return leftNodes + rightNodes + 1;
     }
 
-    public int countNodes(){
+    public int countNodes() {
         return countNodesRec(root);
     }
 
-    private int sumRec(Node root){
-        if(root == null){
+    private int sumRec(Node root) {
+        if (root == null) {
             return 0;
         }
 
@@ -168,63 +170,65 @@ class BinaryTreesB {
         return leftSum + rightSum + root.data;
     }
 
-    public int sum(){
+    public int sum() {
         return sumRec(root);
     }
 
     // private int diamtereRec(Node root){
-    //     if(root == null){
-    //         return 0;
-    //     }
+    // if(root == null){
+    // return 0;
+    // }
 
-    //     int leftDiam = diamtereRec(root.left);
-    //     int leftHeight = heightRec(root.left);
-    //     int rightDiam = diamtereRec(root.right);
-    //     int rightHeight = heightRec(root.right);
-    //     int incRootDiam = leftHeight + rightHeight + 1;
-    //     return Math.max(incRootDiam, Math.max(leftDiam, rightDiam));
+    // int leftDiam = diamtereRec(root.left);
+    // int leftHeight = heightRec(root.left);
+    // int rightDiam = diamtereRec(root.right);
+    // int rightHeight = heightRec(root.right);
+    // int incRootDiam = leftHeight + rightHeight + 1;
+    // return Math.max(incRootDiam, Math.max(leftDiam, rightDiam));
     // }
     // public int diameter(){
-    //     return diamtereRec(root);
+    // return diamtereRec(root);
     // }
 
-    class Info{
+    class Info {
         int diam;
         int ht;
-        Info(int diam, int ht){
+
+        Info(int diam, int ht) {
             this.diam = diam;
             this.ht = ht;
         }
     }
-    private Info diameterRec(Node root){
-        if(root == null){
+
+    private Info diameterRec(Node root) {
+        if (root == null) {
             return new Info(0, 0);
         }
 
         Info leftInfo = diameterRec(root.left);
         Info righInfo = diameterRec(root.right);
 
-        int diam = Math.max(Math.max(leftInfo.diam, righInfo.diam),leftInfo.ht + righInfo.ht + 1);
+        int diam = Math.max(Math.max(leftInfo.diam, righInfo.diam), leftInfo.ht + righInfo.ht + 1);
         int ht = Math.max(leftInfo.ht, righInfo.ht) + 1;
         return new Info(diam, ht);
     }
 
-    public int diameter(){
+    public int diameter() {
         Info info = diameterRec(root);
         return info.diam;
     }
 
-    public boolean isSubTree(Node subTree){
+    public boolean isSubTree(Node subTree) {
         return isSubTree(this.root, subTree);
     }
 
-    private boolean isSubTree(Node root, Node subTree){
-        if(root == null){
+    private boolean isSubTree(Node root, Node subTree) {
+        if (root == null) {
             return false;
         }
 
-        if(root.data == subTree.data){
-            if(isIdentical(root, subTree)){
+        if (root.data == subTree.data) {
+            if (isIdentical(root, subTree)) {
                 return true;
             }
         }
@@ -232,36 +236,85 @@ class BinaryTreesB {
         return isSubTree(root.left, subTree) || isSubTree(root.right, subTree);
     }
 
-    private boolean isIdentical(Node root, Node subTree){
-        if(root == null && subTree == null ){
+    private boolean isIdentical(Node root, Node subTree) {
+        if (root == null && subTree == null) {
             return true;
-        }
-        else if(root == null || subTree == null || root.data != subTree.data){
+        } else if (root == null || subTree == null || root.data != subTree.data) {
             return false;
         }
 
-        if(!isIdentical(root.left, subTree.left)){
+        if (!isIdentical(root.left, subTree.left)) {
             return false;
         }
-        if(!isIdentical(root.right, subTree.right)){
+        if (!isIdentical(root.right, subTree.right)) {
             return false;
         }
 
         return true;
     }
+
+    class Info2 {
+        Node node;
+        int hd;
+
+        Info2(Node node, int hd) {
+            this.node = node;
+            this.hd = hd;
+        }
+    }
+
+    public void printTopView() {
+        Queue<Info2> que = new LinkedList<>();
+        HashMap<Integer, Node> map = new HashMap<>();
+
+        int min = 0, max = 0;
+        que.add(new Info2(root, 0));
+        que.add(null);
+
+        while (!que.isEmpty()) {
+            Info2 curr = que.remove();
+            if (curr == null) {
+                if (que.isEmpty()) {
+                    break;
+                } else {
+                    que.add(null);
+                }
+            } else {
+
+                if (!map.containsKey(curr.hd)) {
+                    map.put(curr.hd, curr.node);
+                }
+
+                if (curr.node.left != null) {
+                    que.add(new Info2(curr.node.left, curr.hd - 1));
+                    min = Math.min(min, curr.hd - 1);
+                }
+
+                if (curr.node.right != null) {
+                    que.add(new Info2(curr.node.right, curr.hd + 1));
+                    max = Math.max(max, curr.hd + 1);
+                }
+            }
+        }
+
+        for (int i = min; i <= max; i++) {
+            System.out.print(map.get(i).data + " ");
+        }
+        System.out.println();
+    }
 }
 
 public class LearningBinaryTrees {
     public static void main(String[] args) {
-        int[] data = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1, 7, -1, -1};
-        int[] data2 = {2, 4, -1, -1, 5, -1, -1};
+        int[] data = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, 7, -1, -1 };
+        int[] data2 = { 2, 4, -1, -1, 5, -1, -1 };
         BinaryTreesB binaryTree = new BinaryTreesB();
         binaryTree.buildTree(data);
 
         BinaryTreesB subTree = new BinaryTreesB();
         subTree.buildTree(data2);
-        subTree.preOrder();
+        binaryTree.preOrder();
 
-        System.out.println(binaryTree.isSubTree(subTree.root));
+        binaryTree.printTopView();
     }
 }
