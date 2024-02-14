@@ -306,7 +306,7 @@ class BinaryTreesB {
 
 public class LearningBinaryTrees {
     public static void main(String[] args) {
-        int[] data = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, 7, -1, -1 };
+        int[] data = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, 7, -1, -1, -1 };
         int[] data2 = { 2, 4, -1, -1, 5, -1, -1 };
         BinaryTreesB binaryTree = new BinaryTreesB();
         binaryTree.buildTree(data);
