@@ -112,6 +112,27 @@ class BinarySearchTree {
     public void delete(int key) {
        root = deleteRec(root, key);
     }
+
+    private void printInRangeRec(Node root, int k1, int k2){
+        if(root == null){
+            return;
+        }
+        if(root.data >= k1 && root.data <= k2){
+            printInRangeRec(root.left, k1, k2);;
+            System.out.print(root.data + " ");
+            printInRangeRec(root.right, k1, k2);
+        }
+        else if(root.data < k1){
+            printInRangeRec(root.left, k1, k2);
+        }
+        else{
+            printInRangeRec(root.right, k1, k2);
+        }
+    }
+
+    public void printInRange(int k1, int k2){
+        printInRangeRec(root, k1, k2);
+    }
 }
 
 public class BinarySearchTrees {
@@ -122,7 +143,6 @@ public class BinarySearchTrees {
             tree.insertNode(arr[i]);
         }
         tree.inOrder();
-        tree.delete(10);
-        tree.inOrder();
+        tree.printInRange(4, 9);
     }
 }
