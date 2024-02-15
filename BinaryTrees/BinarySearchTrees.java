@@ -155,16 +155,34 @@ class BinarySearchTree {
     public void printRoute2Leaf(){
         printRoute2LeafRec(root, new ArrayList<>());
     }
+
+    private boolean isValidRec(Node root, Node min, Node max){
+        if(root == null){
+            return true;
+        }
+        if(min != null && root.data <= min.data){
+            return false;
+        }
+        else if(max != null && root.data >= max.data){
+            return false;
+        }
+
+        return isValidRec(root.left, min, root) && isValidRec(root.right, root, max);
+    }
+
+    public boolean isValid(){
+        return isValidRec(root, null, null);
+    }
 }
 
 public class BinarySearchTrees {
     public static void main(String[] args) {
         BinarySearchTree tree = new BinarySearchTree();
-        int[] arr = { 8, 5, 3, 1, 4, 6, 10, 11, 14 };
+        int[] arr = { 1, 1, 1 };
         for (int i = 0; i < arr.length; i++) {
             tree.insertNode(arr[i]);
         }
         
-        tree.printRoute2Leaf();
+        System.out.println(tree.isValid());
     }
 }
