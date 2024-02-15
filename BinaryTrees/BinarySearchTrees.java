@@ -1,5 +1,7 @@
 package BinaryTrees;
 
+import java.util.ArrayList;
+
 class BinarySearchTree {
     /**
      * Node
@@ -133,16 +135,36 @@ class BinarySearchTree {
     public void printInRange(int k1, int k2){
         printInRangeRec(root, k1, k2);
     }
+
+    private void printRoute2LeafRec(Node root, ArrayList<Integer> list){
+        if(root == null){
+            return;
+        }
+
+        list.add(root.data);
+
+        if(root.left == null && root.right == null){
+            System.out.println(list.toString());
+        }
+
+        printRoute2LeafRec(root.left, list);
+        printRoute2LeafRec(root.right, list);
+        list.remove(list.size()-1);
+    }
+
+    public void printRoute2Leaf(){
+        printRoute2LeafRec(root, new ArrayList<>());
+    }
 }
 
 public class BinarySearchTrees {
     public static void main(String[] args) {
         BinarySearchTree tree = new BinarySearchTree();
-        int[] arr = { 5, 1, 3, 4, 2, 7, 9, 10 };
+        int[] arr = { 8, 5, 3, 1, 4, 6, 10, 11, 14 };
         for (int i = 0; i < arr.length; i++) {
             tree.insertNode(arr[i]);
         }
-        tree.inOrder();
-        tree.printInRange(4, 9);
+        
+        tree.printRoute2Leaf();
     }
 }
