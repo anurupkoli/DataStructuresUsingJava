@@ -143,17 +143,54 @@ class QueOnTree{
     public void convertToBST(){
         convertToBSTRec(this.root);
     }
+
+    class Info{
+        boolean isBST;
+        int size;
+        int max;
+        int min;
+        Info(boolean isBST, int size, int max, int min){
+            this.isBST = false;
+            this.size = 0;
+            this.max = 0;
+            this.min = 0;
+        }
+    }
+    static int maxBST = 0;
+    private Info largestBSTRec(Node root){
+        if(root == null){
+            return new Info(true, 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        }
+
+        Info leftInfo = largestBSTRec(root.left);
+        Info righInfo = largestBSTRec(root.right);
+        int size = leftInfo.size + righInfo.size + 1;
+        int min = Math.min(root.data, Math.min(leftInfo.min, righInfo.min));
+        int max = Math.max(root.data, Math.max(leftInfo.max, righInfo.max));
+
+        if(root.data <= leftInfo.max && root.data >= righInfo.min){
+            return new Info(false, size, max, min);
+        }
+
+        if(leftInfo.isBST && righInfo.isBST){
+            maxBST = Math.max(maxBST, size);
+            return new Info(true, size, max, min);
+        }
+
+        return new Info(false, size, max, min);
+    }
+
+    public void largestBST(){
+        Info info = largestBSTRec(root);
+    }
 }
 
 public class QueOnBinarySearchTree {
     public static void main(String[] args) {
-        int[] data = {8,6,5,3,10,11,12};
+        int[] data = {50, 30, 5,-1,-1, 20, -1, -1,  60, 45, -1, -1, 70, 65, -1, -1, 80, -1, -1};
         QueOnTree tree = new QueOnTree();
-        for (int i = 0; i < data.length; i++) {
-            tree.insertNode(data[i]);
-        }
-        tree.preOrder();
-        tree.convertToBST();
-        tree.preOrder();
+        tree.buildTree(data);
+        tree.largestBST();
+        System.out.println(QueOnTree.maxBST);
     }
 }
