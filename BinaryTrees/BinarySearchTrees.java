@@ -57,6 +57,19 @@ class BinarySearchTree {
         inOrderRec(root);
         System.out.println();
     }
+    private void preOrderRec(Node root) {
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.data + " ");
+        preOrderRec(root.left);
+        preOrderRec(root.right);
+    }
+
+    public void preOrder() {
+        preOrderRec(root);
+        System.out.println();
+    }
 
     private boolean searchRec(Node root, int key) {
         if (root == null) {
@@ -173,16 +186,34 @@ class BinarySearchTree {
     public boolean isValid(){
         return isValidRec(root, null, null);
     }
+
+    private Node mirrorRec(Node root){
+        if(root == null){
+            return null;
+        }
+
+        Node right = mirrorRec(root.right);
+        Node left = mirrorRec(root.left);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
+
+    public void mirror(){
+        root = mirrorRec(root);
+    }
 }
 
 public class BinarySearchTrees {
     public static void main(String[] args) {
         BinarySearchTree tree = new BinarySearchTree();
-        int[] arr = { 1, 1, 1 };
+        int[] arr = { 8,5,10,3,6,11 };
         for (int i = 0; i < arr.length; i++) {
             tree.insertNode(arr[i]);
         }
-        
-        System.out.println(tree.isValid());
+
+        tree.preOrder();
+        tree.mirror();
+        tree.preOrder();
     }
 }
