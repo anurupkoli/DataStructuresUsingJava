@@ -183,14 +183,59 @@ class QueOnTree{
     public void largestBST(){
         Info info = largestBSTRec(root);
     }
+
+
+    private Node mergeBSTRec(Node root1, Node root2){
+        ArrayList<Integer> arr1 = new ArrayList<>();
+        ArrayList<Integer> arr2 = new ArrayList<>();
+        ArrayList<Integer> finalArray = new ArrayList<>();
+
+        returnArray(root1, arr1);
+        returnArray(root2, arr2);
+
+        int i=0, j=0;
+        while (i<arr1.size() && j<arr2.size()) {
+            if(arr1.get(i) <= arr2.get(j)){
+                finalArray.add(arr1.get(i));
+                i++;
+            }
+            else{
+                finalArray.add(arr2.get(j));
+                j++;
+            }
+        }
+
+        while (i<arr1.size()) {
+            finalArray.add(arr1.get(i));
+            i++;
+        }
+
+        while (j<arr2.size()) {
+            finalArray.add(arr2.get(j));
+            j++;
+        }
+
+        return sortedArrayTreeRec(finalArray, 0, finalArray.size()-1);
+    }
+
+    public void mergeBST(Node root1, Node root2){
+        this.root = mergeBSTRec(root1, root2);
+    }
 }
 
 public class QueOnBinarySearchTree {
     public static void main(String[] args) {
-        int[] data = {50, 30, 5,-1,-1, 20, -1, -1,  60, 45, -1, -1, 70, 65, -1, -1, 80, -1, -1};
-        QueOnTree tree = new QueOnTree();
-        tree.buildTree(data);
-        tree.largestBST();
-        System.out.println(QueOnTree.maxBST);
+        int[] data1 = {2,1,4};
+        int[] data2 = {9,3,12};
+        QueOnTree tree1 = new QueOnTree();
+        QueOnTree tree2 = new QueOnTree();
+        for (int i = 0; i < data2.length; i++) {
+            tree1.insertNode(data1[i]);
+            tree2.insertNode(data2[i]);
+        }
+
+        QueOnTree tree3 = new QueOnTree();
+        tree3.mergeBST(tree1.root, tree2.root);
+        tree3.inOrder();
     }
 }
