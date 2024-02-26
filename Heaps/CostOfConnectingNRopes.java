@@ -17,6 +17,7 @@ public class CostOfConnectingNRopes {
         for (int i = 0; i < ropes.length; i++) {
             pq.add(ropes[i]);
         }
+        
         int cost = 0;
         while (pq.size() > 1) {
             int min1 = pq.remove();
