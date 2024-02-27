@@ -1,6 +1,7 @@
 package Hashing;
 
 import java.util.HashMap;
+import java.util.Set;
 
 public class HashMapLearning{
     public static void main(String[] args) {
@@ -17,9 +18,14 @@ public class HashMapLearning{
         // System.out.println(map.remove("Australia"));
         // System.out.println(map);
 
-        System.out.println(map.size());
-        System.out.println(map.isEmpty());
-        map.clear();
-        System.out.println(map);
+        // System.out.println(map.size());
+        // System.out.println(map.isEmpty());
+        // map.clear();
+        // System.out.println(map);
+
+        Set<String> keys = map.keySet();
+        for(String k : keys){
+            System.out.println(k + " : " + map.get(k));
+        }
     }
 }
