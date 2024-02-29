@@ -1,5 +1,6 @@
 package Hashing;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 class HashMapNew<K, V> { 
@@ -92,11 +93,42 @@ class HashMapNew<K, V> {
         Node node = buckets[bi].get(ki);
         return node.value;
     }
+
+    public V remove(K key){
+        int bi = hashFunction(key);
+        int ki = searchInLL(key, bi);
+        if(ki == -1){
+            return null;
+        }
+
+        Node node = buckets[bi].remove(ki);
+        this.nodes--;
+        return node.value;
+    }
+
+    public ArrayList<K> keySet(){
+        ArrayList<K> list = new ArrayList<>();
+        for (int i = 0; i < buckets.length; i++) {
+            LinkedList<Node> nodes = buckets[i];
+            for (Node node : nodes) {
+                list.add(node.key);
+            }
+        }
+        return list;
+    }
+
+    public boolean isEmpty(){
+        if(nodes == 0){
+            return true;
+        }
+        return false;
+    }
 }
 public class HashMapCode {
     public static void main(String[] args) {
         HashMapNew<String, Integer> map = new HashMapNew<String, Integer>();
         map.put("Anurup", 8625);
-        System.out.println(map.get("Anurup"));
+        map.put("Prajwal", 1000);
+        System.out.println(map.keySet());
     }
 }
