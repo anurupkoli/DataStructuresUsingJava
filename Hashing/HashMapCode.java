@@ -72,9 +72,32 @@ class HashMapNew<K, V> {
             reHash();
         }
     }
+
+    public boolean containsKey(K key){
+        int bi = hashFunction(key);
+        int ki = searchInLL(key, bi);
+        if(ki == -1){
+            return false;
+        }
+        return true;
+    }
+
+    public V get(K key){
+        int bi = hashFunction(key);
+        
+        LinkedList<Node> li = buckets[bi];
+        for (int i = 0; i < li.size(); i++) {
+            if(li.get(i).key == key){
+                return li.get(i).value;
+            }
+        }
+        return null;
+    }
 }
 public class HashMapCode {
     public static void main(String[] args) {
-        
+        HashMapNew<String, Integer> map = new HashMapNew<String, Integer>();
+        map.put("Anurup", 8625);
+        System.out.println(map.get("abhay"));
     }
 }
